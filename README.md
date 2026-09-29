@@ -3,12 +3,38 @@
 **[English](./README_EN.md)** | 中文
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Models](https://img.shields.io/badge/思维模型-188个-blue)](references/)
+[![Models](https://img.shields.io/badge/思维模型-189条-blue)](references/)
 [![Disciplines](https://img.shields.io/badge/学科-25+-green)](references/)
 
 > 一个 Agent 技能（Skill）：用 25+ 学科核心思维模型，加上《资本论》《矛盾论》《实践论》三大方法论，把 AI 的"分析"从正确的废话变成可验证的判断。
 
-知识框架源自所长林超《跨学科通识课》25 讲，组织方式是：**矛盾论定主次 → 多学科交叉透视 → 资本论析结构 → 实践论闭环验证**。
+知识框架覆盖 25+ 学科领域——自然科学（熵与热力学、系统论、工程学、函数思维、复杂性科学、概率统计、信息论、脑科学、生理学）、社会科学与商业（认知心理学、社会网络学、金融学、心理学、语言表达、经济学、人类学、营销学、历史学、会计学）、哲学与实践（古代哲学、现代哲学、投资大师思维、自我管理、回到真实世界），组织方式是：**矛盾论定主次 → 多学科交叉透视 → 资本论析结构 → 实践论闭环验证**。
+
+---
+
+## 30 秒看效果
+
+同一个问题：*"24 岁，工作 2 年存了 10 万，无负债，想 30 岁前结婚 + 一套不负债的自住房 + 手上有现金流，第一个 10 万怎么规划才能复利？"*
+
+**不加技能**（先说清楚：2026 年的旗舰模型实跑已经很强，会给数字、会给触发线、会给行动清单，甚至会把互斥目标算成不可行——[样例 01](examples/01-quit-job-for-side-business.md)与[样例 02](examples/02-first-100k-compound-plan.md)都附了 Gemini 与 ChatGPT 的真实截图）。但它仍稳定漏掉四件事：**不声明口径假设**（同一份背景，两个模型把月缺口分别算成 3000 和 7200，差 2.4 倍，谁都没说自己怎么理解的）、**同一份回答内口径不一致**（ChatGPT 的"10 万 + 48 万 = 58 万"漏了它自己主张的复利，同口径应为 77.6 万）、**有触发线但没有对账日期与退出判据**、**不写“我可能错在哪”**。
+
+**加技能**（以下四段**逐字取自[宿主实测输出](examples/skill-output-qoder-02.md)**——Qoder + Qwen3.8-Flash，新会话，未加任何提示词，原文未编辑）：
+
+> 涉及具体数字（房价、首付比例、贷款利率、你的月收入、所在城市）时，我不会编造，一律标为**需查证**并转成行动项——这些恰恰是决定答案的地方。
+>
+> **结论直断**：你的问题被包装成了"10 万怎么投资"，但它真正的名字是"未来 6 年赚钱能力怎么增长"。
+>
+> **冲突 B｜三目标不可能三角**：买房 × 不负债 × 留现金流，三者往往只能取二。→ 裁决靠"目标城市总价"这个未知数。**别在没查房价前硬选**；如果查完发现必须三选二，那才是要认真决策的岔路口（这也是最可能翻车的假设点）。
+>
+> **本分析可能错在哪**：**"买房是结婚的硬前提"** —— 若你的伴侣/家庭并不要求婚房，"有房"的刚性骤降，整个资金规划重心会移向"生活与技能"……**（这是最影响全局的假设）**
+
+这一版把上面那四件事里的**三件**做对了：口径写在前面、缺的数字变成查证动作、末尾自陈 5 处未验证前提。**第四件它挂了**——对账点写的是"30 岁生日当月"、"满 2 年时"这类相对日期，而不是日历日期。该缺陷被回写为硬规则，复测输出已逐字执行（见 [CHANGELOG 的规则加固一节](CHANGELOG.md)）。**这比只贴一个完美样例可信**：缺陷、发现、修复三个环节都在仓库里。
+
+完整推导：[样例 02 · 第一个 10 万的复利规划](examples/02-first-100k-compound-plan.md)｜[样例 01 · 要不要辞职做跨境副业](examples/01-quit-job-for-side-business.md)。
+
+还有第五件：**不审用户自己的目标**——"30 岁前必须结婚"这类刚性 deadline 基线会照单全收，技能会先问一句是不是外部脚本，并为它准备一条"何时应放弃该目标"的判据。
+
+上述差异已在独立宿主里实测复现（Qoder + Qwen3.8-Flash，xhigh 思考，新会话，未加提示词，原文未编辑）：[实测输出 01](examples/skill-output-qoder-01.md)｜[实测输出 02](examples/skill-output-qoder-02.md)。两份实测里模型名基本零编造，但都挂在相对日期上——该缺陷已写回 `SKILL.md` 成为硬规则。
 
 ---
 
@@ -30,7 +56,7 @@ AI 做分析有四个典型的翻车模式，这个技能就是为修它们而�
 
 **问题**：AI 默认只用一两个学科视角，问感情谈沟通技巧，问副业谈努力坚持——视角单一，深度自然没有。
 
-**修复**：内置 **25+ 学科、188 个思维模型**的路由表，按问题类型选 3–6 个学科交叉透视，每个模型必须产出独立增量，同义即砍。
+**修复**：内置 **25+ 学科、189 条思维模型条目**的路由表，按问题类型选 3–6 个学科交叉透视，每个模型必须产出独立增量，同义即砍。
 
 ### 翻车 #3：分不清主次
 
@@ -60,23 +86,35 @@ AI 做分析有四个典型的翻车模式，这个技能就是为修它们而�
 
 | 参考文件 | 学科 | 模型数 |
 |---|---|---|
-| [01-数理与硬科学](references/01-数理与硬科学.md) | 熵与热力学 · 系统论 · 工程学 · 函数思维 · 复杂性科学 · 概率统计 · 信息论 · 脑科学 · 生理学 | 62 |
-| [02-社会经济与商业](references/02-社会经济与商业.md) | 认知心理学 · 社会网络学 · 金融学 · 心理学 · 语言表达 · 经济学 · 人类学 · 营销学 · 历史学 · 会计学 | 63 |
-| [03-哲学与实践方法论](references/03-哲学与实践方法论.md) | 古代哲学 · 现代哲学 · 投资大师思维 · 自我管理 · 资本论 · 矛盾论 · 实践论 | 63 |
+| [00-three-methodologies](references/00-three-methodologies.md) | 资本论 · 矛盾论 · 实践论（含三论联动速查） | 24 |
+| [01-hard-sciences](references/01-hard-sciences.md) | 熵与热力学 · 系统论 · 工程学 · 函数思维 · 复杂性科学 · 概率统计 · 信息论 · 脑科学 · 生理学 | 62 |
+| [02-society-economy-business](references/02-society-economy-business.md) | 认知心理学 · 社会网络学 · 金融学 · 心理学 · 语言表达 · 经济学 · 人类学 · 营销学 · 历史学 · 会计学 | 64 |
+| [03-philosophy-and-praxis](references/03-philosophy-and-praxis.md) | 古代哲学 · 现代哲学 · 投资大师思维 · 自我管理 · 回到真实世界 | 39 |
 
-每个模型统一格式：**一句话原理 → 可直接套用的分析提问模板**，另附「典型适用场景」与「常见误用」。《资本论》《矛盾论》《实践论》三篇额外带分步操作流程。
+合计 **189 条模型条目**（其中 `峰终定律`、`心流` 等少量条目在多个学科下重复出现，去重后唯一模型 186 个）。
+
+每个模型统一格式：**一句话原理 → 可直接套用的分析提问模板**，另附「典型适用场景」与「常见误用」。《资本论》《矛盾论》《实践论》三篇（`00` 文件）额外带分步操作流程，且是每次分析唯一必载项，约 6.8k 字符。
 
 ## 安装使用
 
+一行安装（需 Node ≥ 14，直接从 GitHub 拉取，不依赖 npm 发布）：
+
+```bash
+npx github:MrJiaTu/cross-disciplinary-models --tool <宿主>
+
+# 宿主：claude | codex | cursor | windsurf | cline | gemini | qoder | copilot | generic
+# --all      自动识别当前目录已有的宿主配置并逐个安装
+# --global   装到用户目录（windsurf / cline / copilot 仅支持项目级）
+# --dry-run  先打印会往哪些路径写
+# --list     查看全部支持项与限制
+```
+
 <details>
-<summary><strong>Kimi</strong></summary>
+<summary><strong>能读文件的 agent（Claude Code / Codex / Cursor / Windsurf / Cline / Gemini CLI / Qoder / Copilot）</strong></summary>
 
-在 Releases 下载 `cross-disciplinary-models.skill` 文件，于技能管理中导入即可。
+安装器把 `SKILL.md`、`AGENTS.md`、`references/`、`prompts/` 放进该宿主的技能或规则目录，另写一个只负责「触发 + 指向」的薄适配层；模型库靠渐进式披露按需加载，不会一次塞进上下文。每次分析唯一必载项是 `references/00-three-methodologies.md`（约 6.8k 字符）。
 
-</details>
-
-<details>
-<summary><strong>Claude Code</strong></summary>
+Claude Code 也可以直接手动装：
 
 ```bash
 mkdir -p ~/.claude/skills
@@ -86,9 +124,24 @@ git clone https://github.com/MrJiaTu/cross-disciplinary-models.git ~/.claude/ski
 </details>
 
 <details>
-<summary><strong>其他智能体 / 自定义 Agent</strong></summary>
+<summary><strong>只能粘贴提示词的宿主（ChatGPT 自定义指令 / GPTs、豆包、DeepSeek、Kimi 网页、Gemini 网页、Coze）</strong></summary>
 
-把 `SKILL.md` 注入系统提示词，分析时按需读取 `references/` 下对应文件（渐进式披露，不要一次全读）。
+取 [`prompts/cdm-lite.md`](prompts/cdm-lite.md) 分隔线以下全部内容（约 2.5k 字符），粘贴进系统指令即可。它自包含：只带五步流程骨架、三论操作要点与模型名索引，不依赖任何外部文件——这类宿主读不到 `references/`，所以不要指望它能引用完整模型库。
+
+```bash
+node bin/cdm.js --print          # 直接输出到终端；PowerShell 下用 --print | Out-File -Encoding utf8 lite.txt
+```
+
+</details>
+
+<details>
+<summary><strong>校验数字</strong></summary>
+
+```bash
+node bin/cdm.js --stats           # 各参考文件的模块数 / 条目数 / 去重后唯一模型数
+```
+
+本 README 与 `README_EN.md` 的数字必须与该输出一致。改过 `references/` 请重跑并同步中英两份 README。
 
 </details>
 

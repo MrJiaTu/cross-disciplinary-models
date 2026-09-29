@@ -1,0 +1,45 @@
+{
+  "name": "cross-disciplinary-models",
+  "version": "1.1.0",
+  "description": "跨学科方法通论 Agent Skill —— 25+ 学科 189 条思维模型 + 资本论/矛盾论/实践论，把 AI 的分析变成可验证的判断。支持 Claude Code / Codex / Cursor / Windsurf / Cline / Gemini CLI / Qoder 与粘贴式宿主。",
+  "keywords": [
+    "agent-skill",
+    "claude-code",
+    "skills",
+    "prompt",
+    "mental-models",
+    "cross-disciplinary",
+    "cursor-rules",
+    "agents-md"
+  ],
+  "license": "MIT",
+  "author": "MrJiaTu",
+  "bin": {
+    "cdm": "bin/cdm.js",
+    "cross-disciplinary-models": "bin/cdm.js"
+  },
+  "files": [
+    "bin/",
+    "prompts/",
+    "references/",
+    "examples/",
+    "SKILL.md",
+    "AGENTS.md",
+    "README.md",
+    "README_EN.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=14"
+  },
+  "scripts": {
+    "check": "node bin/cdm.js --list"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MrJiaTu/cross-disciplinary-models.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MrJiaTu/cross-disciplinary-models/issues"
+  }
+}
